@@ -10,8 +10,8 @@ def init(c):
 
     # create python virtual environment
     if not cfg.VENVDIR.exists():
-        c.run(f'{sys.executable} -m venv {cfg.VENVDIR}')
-    c.run(f'{cfg.PYTHON} -m pip install -U setuptools pip')
+        c.run(f'{sys.executable} -m venv {cfg.VENVDIR}', replace_env=False, pty=True)
+    c.run(f'{cfg.PYTHON} -m pip install -U setuptools pip', replace_env=False, pty=True)
 
     # install project packages
     c.run(f'{cfg.PYTHON} -m pip install -r requirements.txt', replace_env=False, pty=True)
