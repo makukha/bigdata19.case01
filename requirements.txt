@@ -1,0 +1,5 @@
+aiohttp
+google-cloud-bigquery
+lxml
+pyarrow
+tqdm
