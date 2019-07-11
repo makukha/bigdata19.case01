@@ -1,3 +1,4 @@
+aiofiles
 aiohttp
 google-cloud-bigquery
 lxml
