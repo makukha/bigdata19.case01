@@ -19,16 +19,15 @@ Installation
     1. Create project "bigdata19".
     1. Enable billing for project "bigdata19".
     1. [Create service account](https://support.google.com/cloud/answer/6158849#serviceaccounts)
-        for project "bigdata19" with role "Project Owner" and download the JSON key as "secret/gcloud.json".
+        for project "bigdata19" with role "Project Owner" and save the JSON key to file "secret/gcloud.json".
 
 
 System Requirements
 -------------------
 
-* OS:
-    * Mac OS – tested on Mojave 10.14
-    * Windows 10 (64-bit) – tested
-    * Linux – _not tested_
+* Mac OS – tested on Mojave 10.14
+* Windows – tested on Windows 10 (64-bit)
+* Linux – _not tested_
 
 
 Prerequisites
