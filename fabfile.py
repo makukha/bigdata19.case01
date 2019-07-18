@@ -26,7 +26,7 @@ def run(c, path):
     c.run('conda info --envs --json', replace_env=False, out_stream=stream)
     info = json.loads(stream.getvalue())
     envdir = next(iter(p for p in (Path(s) for s in info['envs']) if p.name == cfg.CONDA_ENV_NAME))
-    python = envdir / 'python.exe' if os.name == 'nt' else envdir / 'bin' / 'python'
+    python = (envdir / 'python.exe') if (os.name == 'nt') else (envdir / 'bin' / 'python')
     if not python.exists():
         raise ValueError('Unable to locate conda environment python')
 
@@ -37,7 +37,7 @@ def run(c, path):
 @task
 def cloudsdk(c, cmdline):
     """Dockerized Google CloudSDK wrapper."""
-    c.run(f'docker run --rm -v {cfg.GCP_KEY_FILE}:/gcloud.json -v {cfg.BUILDDIR}:/{cfg.BUILDDIR.name} google/cloud-sdk '
+    c.run(f'docker run --rm -v "{cfg.GCP_KEY_FILE}:/gcloud.json" -v "{cfg.BUILDDIR}:/{cfg.BUILDDIR.name}" {cfg.CLOUDSDK_IMAGE} '
         f'bash -c "gcloud auth activate-service-account --key-file=/gcloud.json --project {cfg.GCP_PROJECT_ID} '
             f'&& {cmdline}"',
         replace_env=False)
