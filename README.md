@@ -26,7 +26,7 @@ System Requirements
 -------------------
 
 * Mac OS – tested on Mojave 10.14
-* Windows – tested on Windows 10 (64-bit)
+* Windows – tested on Windows 10 Pro (64-bit)
 * Linux – _not tested_
 
 
