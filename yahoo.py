@@ -62,11 +62,6 @@ def scrape_descriptions_async():
     progress.close()
 
 
-def scrape_descriptions_sync():
-    """Scrape companies descriptions synchronously."""
-    # TODO: Second homework. Use https://docs.python.org/3/library/urllib.html
-
-
 def main():
     scrape_descriptions_async()
 
