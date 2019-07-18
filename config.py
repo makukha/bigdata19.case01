@@ -5,6 +5,7 @@ import yaml
 
 HOMEDIR = Path('.').resolve()
 BUILDDIR = HOMEDIR / 'build'
+DATADIR  = HOMEDIR / 'data'
 SECRETDIR = HOMEDIR / 'secret'
 
 

@@ -1,5 +1,6 @@
 from fabric import task
-import sys
+import os
+from pathlib import Path
 
 import config as cfg
 
@@ -17,7 +18,20 @@ def init(c):
 @task
 def run(c, path):
     """Run python script"""
-    c.run(f'{cfg.PYTHON} {path}', replace_env=False, pty=True)
+
+    # get path to python executable
+    import io
+    import json
+    stream = io.StringIO()
+    c.run('conda info --envs --json', replace_env=False, out_stream=stream)
+    info = json.loads(stream.getvalue())
+    envdir = next(iter(p for p in (Path(s) for s in info['envs']) if p.name == cfg.CONDA_ENV_NAME))
+    python = envdir / 'python.exe' if os.name == 'nt' else envdir / 'bin' / 'python'
+    if not python.exists():
+        raise ValueError('Unable to locate conda environment python')
+
+    # run python script
+    c.run(f'{python} {path}', replace_env=False)
 
 
 @task

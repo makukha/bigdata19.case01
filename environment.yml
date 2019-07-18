@@ -4,7 +4,9 @@ dependencies:
   - aiofiles
   - aiohttp
   - lxml
+  - pip
   - pyarrow
+  - pyyaml
   - tqdm
   - pip:
       - google-cloud-bigquery
