@@ -34,21 +34,25 @@ def read_symbols():
 
 
 def scrape_descriptions_async():
-    """Scrape companies descriptions."""
+    """Scrape companies descriptions asynchronously."""
 
     symbols = read_symbols()
     progress = tqdm(total=len(symbols), file=sys.stdout, disable=False)
     YAHOO_HTMLS.mkdir(parents=True, exist_ok=True)
 
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1.1 Safari/605.1.15',
+        }
+
     async def fetch(symbol, session):
         async with session.get(f'https://finance.yahoo.com/quote/{symbol}/profile?p={symbol}') as response:
             text = await response.read()
             async with aiofiles.open(YAHOO_HTMLS / f'{symbol}.html', 'wb') as f:
-                f.write(text)
+                await f.write(text)
             progress.update(1)
 
     async def run(symbols):
-        async with ClientSession() as session:
+        async with ClientSession(headers=headers) as session:
             tasks = (asyncio.ensure_future(fetch(symbol, session)) for symbol in symbols)
             await asyncio.gather(*tasks)
 
@@ -56,6 +60,11 @@ def scrape_descriptions_async():
     loop.set_exception_handler(lambda x, y: None)  # suppress exceptions because of bug in Python 3.7.3 + aiohttp + asyncio
     loop.run_until_complete(asyncio.ensure_future(run(symbols)))
     progress.close()
+
+
+def scrape_descriptions_sync():
+    """Scrape companies descriptions synchronously."""
+    # TODO: Second homework. Use https://docs.python.org/3/library/urllib.html
 
 
 def main():
