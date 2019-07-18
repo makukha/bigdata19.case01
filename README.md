@@ -39,8 +39,9 @@ Case Study Scope
 * Apache Arrow
 * Apache Cassandra
 * Elasticsearch + Kibana
-* PyCharm
-* GitHub
+* Airflow
+* Git, GitHub
+* PyCharm, Atom
 
 
 System Requirements
@@ -144,7 +145,7 @@ please carefully follow the installation instructions for your system
 Usage
 -----
 
-### Initialize and Run the Project
+### Manage and Run the Project
 
 * `fab init` — Initialize or update the project.
 * `fab run assignment02.py` — Run Assignment 02.
