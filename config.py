@@ -1,19 +1,25 @@
-import os
+import json
 from pathlib import Path
-import sys
+import yaml
 
-
-PROJECT = 'bigdata19'
 
 HOMEDIR = Path('.').resolve()
 BUILDDIR = HOMEDIR / 'build'
-VENVDIR = Path('venv')
-PYTHON = VENVDIR / ('Scripts' if os.name == 'nt' else 'bin') / Path(sys.executable).name
+SECRETDIR = HOMEDIR / 'secret'
 
-YAHOO_ARCH = BUILDDIR / 'yahoo.tbz2'
-YAHOO_HTMLS = BUILDDIR / 'yahoo'
-YAHOO_PARQUET = BUILDDIR / 'yahoo.parquet'
 
-GCPKEY = HOMEDIR / 'gcloud.json'
-GCPREGION = 'europe-west3'
-GCPCLUSTER = 'case01'
+CONDA_ENV_FILE = Path('environment.yml').resolve()
+__conda = yaml.safe_load(CONDA_ENV_FILE.read_text())
+
+CONDA_ENV_NAME = __conda['name']
+
+
+CLOUDSDK_IMAGE = 'google/cloud-sdk'
+
+
+GCP_KEY_FILE = SECRETDIR / 'gcloud.json'
+__gcp = json.loads(GCP_KEY_FILE.read_text())
+
+GCP_PROJECT_ID = __gcp['project_id']
+GCP_REGION = 'europe-west3'
+GCP_CLUSTER = 'case01'

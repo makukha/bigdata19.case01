@@ -1,0 +1,10 @@
+name: bigdata19.case01
+dependencies:
+  - python=3.7
+  - aiofiles
+  - aiohttp
+  - lxml
+  - pyarrow
+  - tqdm
+  - pip:
+      - google-cloud-bigquery
