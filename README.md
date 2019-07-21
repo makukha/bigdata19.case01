@@ -47,9 +47,13 @@ Case Study Scope
 System Requirements
 -------------------
 
-* Mac OS – tested on Mojave 10.14
-* Windows – tested on Windows 10 Pro (64-bit)
-* Linux – _not tested_
+Tested on:
+
+* Mac OS Mojave 10.14  with Docker Desktop
+* Windows 10 Pro (64-bit) with Docker Desktop
+* Windows 10 Home (64-bit) with Docker Toolbox
+
+Linux – _not tested_.
 
 
 Installation

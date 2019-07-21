@@ -3,6 +3,7 @@ dependencies:
   - python=3.7
   - aiofiles
   - aiohttp
+  - fabric
   - lxml
   - pip
   - pyarrow
