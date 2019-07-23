@@ -3,6 +3,7 @@ from fabric import task
 import json
 import os
 from pathlib import Path
+import re
 
 import config as cfg
 
@@ -19,7 +20,7 @@ def init(c):
 
 
 @task
-def run(c, path):
+def run(c, task):
     """Run python script"""
 
     # get path to python executable
@@ -27,8 +28,22 @@ def run(c, path):
     if python is None:
         raise ValueError(f'Unable to locate python for conda environment: {cfg.CONDA_ENV_NAME}')
 
-    # run python script
-    c.run(f'{python} {path}', replace_env=False)
+    # determine task type and run python script
+    tasks = {
+        'file': (
+            re.compile(r'(?P<filename>[a-zA-Z][a-zA-Z0-9_]*\.py)'),
+            f'{python} {{filename}}'),
+        'function': (
+            re.compile(r'(?P<module>[a-zA-Z][a-zA-Z0-9_]*):(?P<function>[a-zA-Z][a-zA-Z0-9_]*)(?P<args>\(.*\))'),
+            f'{python} -c \'import {{module}}; {{module}}.{{function}}{{args}}\''),
+        }
+    for name, (rx, cmdline) in tasks.items():
+        m = rx.fullmatch(task)
+        if m is not None:
+            c.run(cmdline.format(**m.groupdict()), replace_env=False, pty=(not is_windows()))
+            break
+    if m is None:
+        raise ValueError(f'Unsupported task definition: {task}')
 
 
 @task
