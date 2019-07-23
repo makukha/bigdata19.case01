@@ -143,7 +143,9 @@ please carefully follow the installation instructions for your system
 
 ### Google Cloud Platform account setup
 
-> TODO
+See this screencast: [Create Service Account for GCP Project](https://www.youtube.com/watch?v=6tWWc4dhrbM).
+
+THe JSON file downloaded in this video must be renamed as "gcloud.json" and put into folder "/secret".
 
 
 Usage
