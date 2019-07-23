@@ -73,7 +73,7 @@ Installation
     1. [Register free Google Cloud Platform account](https://cloud.google.com/free).
     1. Create project "bigdata19".
     1. Enable billing for project "bigdata19".
-    1. [Create service account](https://support.google.com/cloud/answer/6158849#serviceaccounts)
+    1. [Create service account](#create-gcp-service-account)
         for project "bigdata19" with role "Project Owner" and save the JSON key to file "secret/gcloud.json".
 
 
@@ -141,7 +141,9 @@ please carefully follow the installation instructions for your system
 * [Install Docker Desktop for Windows](https://docs.docker.com/docker-for-windows/install/)
 
 
-### Google Cloud Platform account setup
+## Google Cloud Platform
+
+### Create GCP Service Account
 
 See this screencast: [Create Service Account for GCP Project](https://www.youtube.com/watch?v=6tWWc4dhrbM).
 
