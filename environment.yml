@@ -11,4 +11,5 @@ dependencies:
   - pyyaml
   - tqdm
   - pip:
+      - fabricutils
       - google-cloud-bigquery
