@@ -16,7 +16,7 @@ cfg.BUILDDIR.mkdir(parents=True, exist_ok=True)
 def init(c):
     """Initialize environment and project."""
 
-    c.run(f'{sys.executable} -m pip install -U fabricutils')
+    c.run(f'{sys.executable} -m pip install -U fabricutils', replace_env=False)
     c.run(f'conda env create -f "{cfg.CONDA_ENV_FILE}" --force', replace_env=False)
     c.run(f'docker pull {cfg.CLOUDSDK_IMAGE}', replace_env=False)
 
