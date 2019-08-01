@@ -95,6 +95,6 @@ def pyspark(c, cmdline=''):
     pyspark = fu.get_python_script_path(c, envdir, 'pyspark')
     env = {'PYSPARK_PYTHON': str(python)}
     if python.exists() and pyspark.exists():
-        c.run(f'{pyspark} {cmdline}', env=env, replace_env=False, pty=(not fu.is_windows()))
+        c.run(f'{pyspark} {cmdline}', env=env, replace_env=False, pty=(not fu.is_windows()), echo=True)
     else:
         raise ValueError('Unable to find executable for "pyspark"')
