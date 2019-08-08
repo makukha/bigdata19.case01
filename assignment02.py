@@ -7,7 +7,7 @@ and compare the scraping speed to asynchronous mode.
 
 Run this code with
 
-    > fab run assignment02.py
+    > invoke run assignment02.py
 """
 
 from yahoo import read_symbols, YAHOO_HTMLS

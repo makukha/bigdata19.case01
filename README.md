@@ -28,7 +28,7 @@ Case Study Scope
 * Python:
     * aiofiles, aiohttp, asyncio
     * csv
-    * [Fabric](http://www.fabfile.org), tqdm
+    * [Invoke](http://www.pyinvoke.org), tqdm
     * pyspark, pyarrow
 * Google Cloud Platform:
     * Google BigQuery
@@ -67,7 +67,7 @@ Installation
     1. Fork this project to your account on GitHub.
     1. Clone your fork.
     1. Open Terminal or Windows PowerShell and `cd` to project directory.
-    1. Initialize project (run `fab init` in Terminal or Windows PowerShell)
+    1. Initialize project (run `invoke init` in Terminal or Windows PowerShell)
 
 1. Google Cloud Platform setup:
     1. [Register free Google Cloud Platform account](https://cloud.google.com/free).
@@ -103,17 +103,15 @@ Open **new window** of Terminal or Windows PowerShell.
         Python 3.7.3
 
 
-### Fabric
+### Invoke
 
-In this project we use [Fabric](http://www.fabfile.org) for automation:
+In this project we use [Invoke](http://www.pyinvoke.org) for automation:
 
-    > conda install -y fabric
+    > conda install -y invoke
 
 #### Verify installation
 
-    > fab --version
-    Fabric 2.4.0
-    Paramiko 2.4.2
+    > invoke --version
     Invoke 1.2.0
 
 
@@ -155,12 +153,12 @@ Usage
 
 ### Manage and Run the Project
 
-* `fab init` — Initialize or update the project.
-* `fab run assignment02.py` — Run Assignment 02.
+* `invoke init` — Initialize or update the project.
+* `invoke run assignment02.py` — Run Assignment 02.
 
 ### Manage Google Cloud Platform Resources
 
-* `fab cloudsdk "{gcloud|gsutil|...} args"` — Run arbitrary CloudSDK commands.
-* `fab cluster list` — List Dataproc clusters.
-* `fab cluster create` — Create Dataproc cluster.
-* `fab cluster delete` — Delete Dataproc cluster.
+* `invoke cloudsdk "{gcloud|gsutil|...} args"` — Run arbitrary CloudSDK commands.
+* `invoke cluster list` — List Dataproc clusters.
+* `invoke cluster create` — Create Dataproc cluster.
+* `invoke cluster delete` — Delete Dataproc cluster.

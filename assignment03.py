@@ -8,7 +8,7 @@ It is recommended to scrape data asynchronously, in batches.
 
 Run this code with
 
-    > fab run assignment03:scrape_data()
+    > invoke run assignment03:scrape_data()
 """
 import config as cfg
 
