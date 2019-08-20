@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+
+  master:
+    image: bigdata19
+    build: .
+    ports:
+      - 8080:8080
+      - 7077:7077
+    networks:
+      - bigdata19
+    volumes:
+      - '.:/code'
+    working_dir: '/code'
+    environment:
+      - SPARK_SERVICE=master
+
+  worker:
+    image: bigdata19
+    build: .
+    depends_on:
+      - master
+    ports:
+      - 8080
+    networks:
+      - bigdata19
+    volumes:
+      - '.:/code'
+    working_dir: '/code'
+    environment:
+      - SPARK_SERVICE=worker
+      - SPARK_MASTER_HOST=master
+
+  client:
+    image: bigdata19
+    build: .
+    depends_on:
+      - master
+      - worker
+    networks:
+      - bigdata19
+    volumes:
+      - '.:/code'
+    working_dir: '/code'
+
+networks:
+
+  bigdata19:
+    driver: bridge
+    ipam:
+      driver: default
