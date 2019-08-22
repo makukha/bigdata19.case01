@@ -1,8 +1,10 @@
+import pickle
 from pyspark import SparkContext
 from pyspark.ml import Pipeline
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import CountVectorizer, HashingTF, IDF, RegexTokenizer, StopWordsRemover, StringIndexer
+from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
 from pyspark.sql import SQLContext
 
 from config import BUILDDIR, DATADIR
@@ -45,7 +47,8 @@ def main():
         index_target,
         ])
     # apply data preparation pipeline
-    prepared = pipeline_wordcount.fit(data).transform(data)
+    model_wordcount = pipeline_wordcount.fit(data)
+    prepared = model_wordcount.transform(data)
 
     # split to training and testing
     training, testing = prepared.randomSplit([0.7, 0.3], seed=100500)
@@ -64,6 +67,17 @@ def main():
         predicted = model.fit(training).transform(testing)
         evaluator = MulticlassClassificationEvaluator(predictionCol='prediction', metricName='accuracy')
         print(f'{name} model accuracy = {evaluator.evaluate(predicted)}')
+
+    # fit hyperparameters
+    grid = (ParamGridBuilder()
+        .addGrid(logistic_wordcount.regParam, [0.1, 0.2, 0.3, 0.4])
+        .addGrid(logistic_wordcount.elasticNetParam, [0.0, 0.1, 0.2, 0.3])
+        .build()
+        )
+    cv = CrossValidator(
+        estimator=logistic_wordcount,
+        )
+
 
 
 if __name__ == '__main__':

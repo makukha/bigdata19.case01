@@ -98,4 +98,4 @@ def pyspark(c):
 @task
 def submit(c, cmd):
     """Run Spark command."""
-    c.run(f'docker-compose run --rm --no-deps client spark-submit {cmd}', pty=PTY)
+    c.run(f'docker-compose run --rm client spark-submit {cmd}', pty=PTY)
