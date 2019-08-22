@@ -4,7 +4,7 @@ from pyspark.ml import Pipeline
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import CountVectorizer, HashingTF, IDF, RegexTokenizer, StopWordsRemover, StringIndexer
-from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
+from pyspark.ml.tuning import ParamGridBuilder, CrossValidator, CrossValidatorModel
 from pyspark.sql import SQLContext
 
 from config import BUILDDIR, DATADIR
@@ -82,7 +82,7 @@ def main():
         evaluator=evaluator,
         seed=100500,
         )
-    model_cv = cv.fit(prepared) # model_cv = cv.load('build/model_cv')
+    model_cv = cv.fit(prepared) # model_cv = CrossValidatorModel.load('build/model_cv')
     breakpoint()
     model_cv.save('build/model_cv')
 
