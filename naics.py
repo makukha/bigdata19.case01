@@ -76,8 +76,11 @@ def main():
         )
     cv = CrossValidator(
         estimator=logistic_wordcount,
+        estimatorParamMaps=grid,
+        numFolds=5,
         )
-
+    model_cv = cv.fit(prepared)
+    breakpoint()
 
 
 if __name__ == '__main__':
