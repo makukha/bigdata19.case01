@@ -61,11 +61,11 @@ def main():
     logistic_tfidf = LogisticRegression(regParam=0.3, elasticNetParam=0,
         featuresCol='words_tfidf', labelCol='label', predictionCol='prediction', probabilityCol='probability')
 
+    evaluator = MulticlassClassificationEvaluator(predictionCol='prediction', metricName='accuracy')
     for model, name in (
             (logistic_wordcount, 'Word count + Logistic regression'),
             (logistic_tfidf, 'TF-IDF + Logistic regression')):
         predicted = model.fit(training).transform(testing)
-        evaluator = MulticlassClassificationEvaluator(predictionCol='prediction', metricName='accuracy')
         print(f'{name} model accuracy = {evaluator.evaluate(predicted)}')
 
     # fit hyperparameters
@@ -82,8 +82,9 @@ def main():
         evaluator=evaluator,
         seed=100500,
         )
-    model_cv = cv.fit(prepared)
+    model_cv = cv.fit(prepared) # model_cv = cv.load('build/model_cv')
     breakpoint()
+    model_cv.save('build/model_cv')
 
 
 if __name__ == '__main__':
